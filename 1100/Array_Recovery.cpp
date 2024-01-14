@@ -36,7 +36,7 @@ using namespace __gnu_pbds;
 // Right Left Up Down
 intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m, k, w;
+intt a, b, n, m;
 
 bool possible(int x, int y)
 {
@@ -64,16 +64,28 @@ bool isPrime(intt n)
 template <class T>
 using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+intt arr[100];
+
 void solve()
 {
-    cin >> k >> n >> w;
-    intt total = 0;
-    ff(i, 1, w + 1)
+    cin >> n;
+    v.rs(n);
+    f(i, n)
     {
-        total += (i * k);
+        cin >> v[i];
     }
-    intt result = (total - n > 0) ? (total - n) : 0;
-    cout << result;
+    arr[0] = v[0];
+    for (intt i = 1; i < n; i++)
+    {
+        if (arr[i - 1] - v[i] >= 0 and v[i] != 0)
+        {
+            cout << -1 << "\n";
+            rt;
+        }
+        arr[i] = arr[i - 1] + v[i];
+    }
+    f(i, n) cout << arr[i] << " ";
+    cout << "\n";
 }
 
 int32_t main()
@@ -81,7 +93,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-
-    solve();
+    intt tc;
+    cin >> tc;
+    while (tc--)
+        solve();
     return 0;
 }

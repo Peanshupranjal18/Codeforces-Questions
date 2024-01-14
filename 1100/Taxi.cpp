@@ -36,7 +36,7 @@ using namespace __gnu_pbds;
 // Right Left Up Down
 intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m, k, w;
+intt a, b, n, m;
 
 bool possible(int x, int y)
 {
@@ -64,16 +64,53 @@ bool isPrime(intt n)
 template <class T>
 using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+int arr[5];
+
 void solve()
 {
-    cin >> k >> n >> w;
-    intt total = 0;
-    ff(i, 1, w + 1)
+    cin >> n;
+    f(i, n)
     {
-        total += (i * k);
+        cin >> a;
+        arr[a]++;
     }
-    intt result = (total - n > 0) ? (total - n) : 0;
-    cout << result;
+
+    int ans = arr[4];
+
+    // Distribute pairs of 2s
+    ans += arr[2] / 2;
+    arr[2] %= 2;
+
+    // Distribute 3s and 1s
+    if (arr[3] <= arr[1])
+    {
+        ans += arr[3];
+        arr[1] -= arr[3];
+        arr[3] = 0;
+    }
+    else
+    {
+        ans += arr[3];
+        arr[3] = 0;
+        arr[1] = 0;
+    }
+
+    if (arr[2] == 1 and arr[1] <= 2)
+    {
+        ans++;
+        arr[2] = 0;
+        arr[1] = 0;
+    }
+
+    if (arr[1] > 0)
+    {
+        if (arr[1] % 4 == 0)
+            ans += arr[1] / 4;
+        else
+            ans += (arr[1] / 4) + 1;
+    }
+
+    cout << ans;
 }
 
 int32_t main()
@@ -81,7 +118,7 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-
+    // intt tc;cin>>tc;while(tc--)
     solve();
     return 0;
 }
