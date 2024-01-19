@@ -36,7 +36,7 @@ using namespace __gnu_pbds;
 // Right Left Up Down
 intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m;
+intt a, b, n, m, k1, k2;
 
 bool possible(int x, int y)
 {
@@ -66,58 +66,13 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 
 void solve()
 {
-    intt n;
     cin >> n;
-    vector<string> v(n);
-
-    um<string, int> dp;
-
-    intt arr[n];
-    f(i, n) arr[i] = 0;
-
-    f(i, n)
-    {
-        cin >> v[i];
-        if (dp.find(v[i]) != dp.end())
-            arr[i] = 1;
-        string b = v[i] + v[i];
-        if (b.length() <= 8)
-            dp[b]++;
-        dp[v[i]]++;
-    }
-
-    vector<string> v1;
-    for (intt i = 0; i < n; i++)
-    {
-        if (arr[i] == 0)
-            v1.push_back(v[i]);
-    }
-
-    f(i, v1.size())
-    {
-        // if (dp[v1[i]] > 1)
-        // {
-        //     arr[i] = 1;
-        //     continue;
-        // }
-        // else
-        {
-            f(j, n)
-            {
-                f(k, n)
-                {
-                    if (v[j] + v[k] == v1[i])
-                    {
-                        arr[i] = 1;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    f(i, n) cout << arr[i];
-    cout << "\n";
+    cin >> k1;
+    v.rs(k1);
+    f(i, k1) cin >> v[i];
+    cin >> k2;
+    v1.rs(k2);
+    f(i, k2) cin >> v1[i];
 }
 
 int32_t main()
@@ -125,9 +80,7 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    intt tc;
-    cin >> tc;
-    while (tc--)
-        solve();
+    // intt tc;cin>>tc;while(tc--)
+    solve();
     return 0;
 }
