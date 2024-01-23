@@ -36,7 +36,7 @@ using namespace __gnu_pbds;
 // Right Left Up Down
 intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m, q;
+intt a, b, n, m;
 
 bool possible(int x, int y)
 {
@@ -60,31 +60,32 @@ bool isPrime(intt n)
     return true;
 }
 
-const intt maxN = 2e5 + 5;
-intt arr[maxN];
-
 // oset<int>s:s.find_by_order(k):Kth element in s,s.order_of_key(k):Number of item strictly lessthan k
 template <class T>
 using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 void solve()
 {
-    cin >> n >> q;
-    arr[0] = 0;
-    v.rs(n + 1);
-    ff(i, 1, n + 1)
+    cin >> n >> m >> a;
+    intt cnt = 0;
+    while (n > 0)
     {
-        cin >> v[i];
-        arr[i] = arr[i - 1] + v[i];
+        cnt++;
+        n -= a;
     }
-    f(i, q)
+    // cout << cnt << "\n";
+    intt cnt1 = cnt - 1;
+    // cout << cnt1 << "\n";
+    intt cnt2 = 0;
+    m -= a;
+    while (m > 0)
     {
-        cin >> a;
-        intt x = ub(all(v), a) - v.begin();
-
-        cout << arr[x - 1] << " ";
+        cnt2++;
+        m -= a;
     }
-    cout << "\n";
+    // cout << cnt2 << "\n";
+    intt ans = cnt + cnt2 + (cnt1 * cnt2);
+    cout << ans;
 }
 
 int32_t main()
@@ -92,9 +93,7 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    intt tc;
-    cin >> tc;
-    while (tc--)
-        solve();
+    // intt tc;cin>>tc;while(tc--)
+    solve();
     return 0;
 }

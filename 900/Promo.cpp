@@ -60,31 +60,18 @@ bool isPrime(intt n)
     return true;
 }
 
-const intt maxN = 2e5 + 5;
-intt arr[maxN];
+const intt maxN =
 
-// oset<int>s:s.find_by_order(k):Kth element in s,s.order_of_key(k):Number of item strictly lessthan k
-template <class T>
-using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+    // oset<int>s:s.find_by_order(k):Kth element in s,s.order_of_key(k):Number of item strictly lessthan k
+    template <class T>
+    using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 void solve()
 {
     cin >> n >> q;
-    arr[0] = 0;
-    v.rs(n + 1);
-    ff(i, 1, n + 1)
-    {
-        cin >> v[i];
-        arr[i] = arr[i - 1] + v[i];
-    }
-    f(i, q)
-    {
-        cin >> a;
-        intt x = ub(all(v), a) - v.begin();
-
-        cout << arr[x - 1] << " ";
-    }
-    cout << "\n";
+    // at least x y cheapest of them are free
+    v.rs(n);
+    f(i, n) cin >> v[i];
 }
 
 int32_t main()

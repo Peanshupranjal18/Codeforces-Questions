@@ -36,7 +36,7 @@ using namespace __gnu_pbds;
 // Right Left Up Down
 intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m, q;
+intt a, b, n, m, c, d;
 
 bool possible(int x, int y)
 {
@@ -60,31 +60,44 @@ bool isPrime(intt n)
     return true;
 }
 
-const intt maxN = 2e5 + 5;
-intt arr[maxN];
-
 // oset<int>s:s.find_by_order(k):Kth element in s,s.order_of_key(k):Number of item strictly lessthan k
 template <class T>
 using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 void solve()
 {
-    cin >> n >> q;
-    arr[0] = 0;
-    v.rs(n + 1);
-    ff(i, 1, n + 1)
+    cin >> a >> b >> c >> d;
+    if (a == 0 and c == 0)
     {
-        cin >> v[i];
-        arr[i] = arr[i - 1] + v[i];
+        cout << 0 << "\n";
+        rt;
     }
-    f(i, q)
+    if (a == 0 or c == 0)
     {
-        cin >> a;
-        intt x = ub(all(v), a) - v.begin();
+        cout << 1 << "\n";
+        rt;
+    }
 
-        cout << arr[x - 1] << " ";
+    if (b * c == a * d)
+    {
+        cout << 0 << "\n";
+        rt;
     }
-    cout << "\n";
+
+    if ((a * d) % (b * c) == 0 or (b * c) % (a * d) == 0)
+    {
+        cout << 1 << "\n";
+        rt;
+    }
+
+    cout << 2 << "\n";
+    // 1/2 and 2/3 -> 2
+    // if(a!=c and b==d){
+    //     cout<<2<<"\n";
+    // }
+    // if(b!=d and a==c){
+    //     cout<<2<<"\n";
+    // }
 }
 
 int32_t main()
