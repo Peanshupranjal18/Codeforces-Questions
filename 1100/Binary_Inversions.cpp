@@ -68,25 +68,6 @@ void solve()
 {
     cin >> n;
     v.rs(n);
-    intt sum = 0;
-    intt mine = LLONG_MAX;
-    intt cnt = 0;
-    f(i, n)
-    {
-        cin >> v[i];
-        sum += abs(v[i]);
-        mine = min(mine, abs(v[i]));
-        if (v[i] < 0)
-            cnt++;
-    }
-    if (cnt % 2 == 0)
-    {
-        cout << sum << "\n";
-    }
-    else
-    {
-        cout << sum - 2 * mine << "\n";
-    }
 }
 
 int32_t main()

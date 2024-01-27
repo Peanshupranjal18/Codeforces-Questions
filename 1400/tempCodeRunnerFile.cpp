@@ -64,29 +64,49 @@ bool isPrime(intt n)
 template <class T>
 using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+intt arr[1001];
+
 void solve()
 {
     cin >> n;
-    v.rs(n);
-    intt sum = 0;
-    intt mine = LLONG_MAX;
-    intt cnt = 0;
+    f(i, 1001) arr[i] = -1;
     f(i, n)
     {
-        cin >> v[i];
-        sum += abs(v[i]);
-        mine = min(mine, abs(v[i]));
-        if (v[i] < 0)
-            cnt++;
+        cin >> a;
+        if (a % 2 == 0)
+            arr[a] = 2;
+        else
+        {
+            if (arr[a] == -1 and a % 3 == 0)
+                arr[a] = 3;
+            if (arr[a] == -1 and a % 5 == 0)
+                arr[a] = 5;
+            if (arr[a] == -1 and a % 7 == 0)
+                arr[a] = 7;
+            if (arr[a] == -1 and a % 11 == 0)
+                arr[a] = 11;
+            if (arr[a] == -1 and a % 13 == 0)
+                arr[a] = 1;
+            if (arr[a] == -1 and a % 17 == 0)
+                arr[a] = 4;
+            if (arr[a] == -1 and a % 19 == 0)
+                arr[a] = 6;
+            if (arr[a] == -1 and a % 23 == 0)
+                arr[a] = 8;
+            if (arr[a] == -1 and a % 29 == 0)
+                arr[a] = 9;
+            if (arr[a] == -1 and a % 31 == 0)
+                arr[a] = 10;
+        }
     }
-    if (cnt % 2 == 0)
+    ff(i, 4, 1001)
     {
-        cout << sum << "\n";
+        if (arr[i] == -1)
+            continue;
+        else
+            cout << arr[i] << " ";
     }
-    else
-    {
-        cout << sum - 2 * mine << "\n";
-    }
+    cout << "\n";
 }
 
 int32_t main()

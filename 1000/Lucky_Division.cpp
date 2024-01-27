@@ -79,14 +79,16 @@ void solve()
         cout << "YES";
         rt;
     }
-    if (n % 4 == 0 or n % 7 == 0)
+    vector<intt> v = {4, 7, 47, 74, 444, 447, 474, 744, 477, 747, 774, 777};
+    f(i, sz(v))
     {
-        cout << "YES"
-             << "\n";
-        rt;
+        if (n % v[i] == 0)
+        {
+            cout << "YES";
+            rt;
+        }
     }
-    cout << "NO"
-         << "\n";
+    cout << "NO";
 }
 
 int32_t main()
@@ -94,7 +96,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // intt tc;cin>>tc;while(tc--)
+    // intt tc;
+    // cin >> tc;
+    // while (tc--)
     solve();
     return 0;
 }

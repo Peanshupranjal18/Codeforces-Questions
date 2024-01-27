@@ -73,6 +73,65 @@ void solve()
     cin >> k2;
     v1.rs(k2);
     f(i, k2) cin >> v1[i];
+
+    deque<intt> q1, q2;
+
+    f(i, k1) q1.push_front(v[i]);
+    f(i, k2) q2.push_front(v1[i]);
+
+    deque<intt> q3(all(q1));
+    deque<intt> q4(all(q2));
+
+    intt cnt = 0;
+
+    while (true)
+    {
+        if (q1.back() < q2.back())
+        {
+            q2.push_front(q1.back());
+            q2.push_front(q2.back());
+            q1.pop_back();
+            q2.pop_back();
+            cnt++;
+
+            if (q1 == q3 and q2 == q4)
+            {
+                cout << -1;
+                rt;
+            }
+
+            if (q1.empty())
+            {
+                cout << cnt << " " << 2;
+                rt;
+            }
+        }
+        else
+        {
+            q1.push_front(q2.back());
+            q1.push_front(q1.back());
+            q2.pop_back();
+            q1.pop_back();
+            cnt++;
+
+            if (q1 == q3 and q2 == q4)
+            {
+                cout << -1;
+                rt;
+            }
+
+            if (q2.empty())
+            {
+                cout << cnt << " " << 1;
+                rt;
+            }
+        }
+        if (cnt > 1000)
+        {
+            cout << -1;
+            rt;
+        }
+    }
 }
 
 int32_t main()

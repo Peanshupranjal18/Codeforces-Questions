@@ -66,27 +66,8 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 
 void solve()
 {
-    cin >> n;
-    v.rs(n);
-    intt sum = 0;
-    intt mine = LLONG_MAX;
-    intt cnt = 0;
-    f(i, n)
-    {
-        cin >> v[i];
-        sum += abs(v[i]);
-        mine = min(mine, abs(v[i]));
-        if (v[i] < 0)
-            cnt++;
-    }
-    if (cnt % 2 == 0)
-    {
-        cout << sum << "\n";
-    }
-    else
-    {
-        cout << sum - 2 * mine << "\n";
-    }
+    string s;
+    cin >> s;
 }
 
 int32_t main()
