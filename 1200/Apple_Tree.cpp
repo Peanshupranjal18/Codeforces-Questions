@@ -36,12 +36,12 @@ using namespace __gnu_pbds;
 // Right Left Up Down
 intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m;
+// intt a, b, n, m;
 
-bool possible(int x, int y)
-{
-    return (x < n && x >= 0 && y < m && y >= 0);
-}
+// bool possible(int x, int y)
+// {
+//     return (x < n && x >= 0 && y < m && y >= 0);
+// }
 
 vi v, v1, v2, v3, v4;
 vi dp(200001);
@@ -64,21 +64,58 @@ bool isPrime(intt n)
 template <class T>
 using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-// extremly good method
+const intt maxN = 2e5 + 5;
+vvi adj;
+intt cnt[maxN];
+
+void dfs(intt node, intt parent)
+{
+    if (adj[node].size() == 1 and adj[node][0] == parent)
+    {
+        cnt[node] = 1;
+    }
+    else
+    {
+        for (auto it : adj[node])
+        {
+            if (it != parent)
+            {
+                dfs(it, node);
+                // root mein children ka value jodne ka tarika
+                cnt[node] += cnt[it];
+            }
+        }
+    }
+}
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
-    string s;
-    cin >> s;
-    vector<int> w(n + 1);
-    for (intt i = 1; i <= n; i++)
-        w[i] = w[i - 1] + int(s[i - 1] == 'W');
-    int result = INT_MAX;
-    for (int i = k; i <= n; i++)
-        result = min(result, w[i] - w[i - k]);
-    cout << result << endl;
+    intt n, m;
+    cin >> n;
+    adj.assign(n, vector<intt>());
+    for (intt i = 0; i < n - 1; i++)
+    {
+        intt a, b;
+        cin >> a >> b;
+        a--;
+        b--;
+        adj[a].pb(b);
+        adj[b].pb(a);
+    }
+
+    memset(cnt, 0, sizeof(cnt));
+    dfs(0, -1);
+
+    cin >> m;
+    f(i, m)
+    {
+        intt x, y;
+        cin >> x >> y;
+        x--;
+        y--;
+        intt res = cnt[x] * cnt[y];
+        cout << res << "\n";
+    }
 }
 
 int32_t main()

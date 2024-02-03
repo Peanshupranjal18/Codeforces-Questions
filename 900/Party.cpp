@@ -64,21 +64,46 @@ bool isPrime(intt n)
 template <class T>
 using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-// extremly good method
+vi adj[2005];
+intt vis[2005];
+intt subtree_sz[2005];
+vi depth(2005, 1);
+
+void dfs(intt node)
+{
+    subtree_sz[node] = 1;
+    for (intt child : adj[node])
+    {
+        depth[child] = depth[node] + 1;
+        dfs(child);
+        subtree_sz[node] += subtree_sz[child];
+    }
+}
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
-    string s;
-    cin >> s;
-    vector<int> w(n + 1);
-    for (intt i = 1; i <= n; i++)
-        w[i] = w[i - 1] + int(s[i - 1] == 'W');
-    int result = INT_MAX;
-    for (int i = k; i <= n; i++)
-        result = min(result, w[i] - w[i - k]);
-    cout << result << endl;
+    cin >> n;
+    v.rs(n + 1);
+    ff(i, 1, n + 1)
+    {
+        cin >> v[i];
+        if (v[i] == -1)
+            continue;
+        else
+        {
+            adj[v[i]].pb(i);
+        }
+    }
+    memset(vis, -1, sizeof(vis));
+    ff(i, 1, n + 1)
+    {
+        if (vis[i] == -1)
+        {
+            dfs(i);
+        }
+    }
+    intt ans = maxv(all(depth));
+    cout << ans;
 }
 
 int32_t main()
@@ -86,9 +111,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    intt tc;
-    cin >> tc;
-    while (tc--)
-        solve();
+    // intt tc;
+    // cin >> tc;
+    // while (tc--)
+    solve();
     return 0;
 }
