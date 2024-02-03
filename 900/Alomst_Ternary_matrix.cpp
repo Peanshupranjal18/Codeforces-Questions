@@ -66,9 +66,14 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 
 void solve()
 {
-    intt l, r, x;
-    cin >> l >> r >> x;
-    cin >> a >> b;
+    cin >> n >> m;
+    for (ll i = 1; i <= n; i++)
+    {
+        for (ll j = 1; j <= m; j++)
+        {
+            cout << ((i % 4 <= 1) != (j % 4 <= 1)) << " \n"[j == m];
+        }
+    }
 }
 
 int32_t main()
