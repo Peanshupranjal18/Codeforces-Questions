@@ -36,7 +36,7 @@ using namespace __gnu_pbds;
 // Right Left Up Down
 intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m;
+intt a, b, n, m, l, r, x;
 
 bool possible(int x, int y)
 {
@@ -66,6 +66,25 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 
 void solve()
 {
+    cin >> n >> l >> r >> x;
+    // at least x and atmost r
+    v.rs(n);
+    f(i, n) cin >> v[i];
+    intt cnt = 0;
+    for (intt mask = 0; mask < (1 << n); mask++)
+    {
+        intt sum_of_this_subset = 0;
+        for (intt i = 0; i < n; i++)
+        {
+            if (mask & (1 << i))
+            {
+                sum_of_this_subset += v[i];
+                if (sum_of_this_subset > l and sum_of_this_subset < r)
+                    cnt++;
+            }
+        }
+    }
+    cout << cnt;
 }
 
 int32_t main()
@@ -73,9 +92,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    intt tc;
-    cin >> tc;
-    while (tc--)
-        solve();
+    // intt tc;
+    // cin >> tc;
+    // while (tc--)
+    solve();
     return 0;
 }
