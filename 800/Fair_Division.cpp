@@ -36,7 +36,7 @@ using namespace __gnu_pbds;
 // Right Left Up Down
 intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m, l, r, x;
+intt a, b, n, m;
 
 bool possible(int x, int y)
 {
@@ -66,25 +66,38 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 
 void solve()
 {
-    cin >> n >> l >> r >> x;
-    // at least x and atmost r
-    v.rs(n);
-    f(i, n) cin >> v[i];
-    intt cnt = 0;
-    for (intt mask = 0; mask < (1 << n); mask++)
+    int n;
+    cin >> n;
+    int cnt1 = 0, cnt2 = 0;
+    for (int i = 0; i < n; i++)
     {
-        intt sum_of_this_subset = 0;
-        for (intt i = 0; i < n; i++)
+        int c;
+        cin >> c;
+        if (c == 1)
         {
-            if (mask & (1 << i))
-            {
-                sum_of_this_subset += v[i];
-                if (sum_of_this_subset >= l and sum_of_this_subset <= r)
-                    cnt++;
-            }
+            cnt1++;
+        }
+        else
+        {
+            cnt2++;
         }
     }
-    cout << cnt;
+    if ((cnt1 + 2 * cnt2) % 2 != 0)
+    {
+        cout << "NO\n";
+    }
+    else
+    {
+        int sum = (cnt1 + 2 * cnt2) / 2;
+        if (sum % 2 == 0 || (sum % 2 == 1 && cnt1 != 0))
+        {
+            cout << "YES\n";
+        }
+        else
+        {
+            cout << "NO\n";
+        }
+    }
 }
 
 int32_t main()
@@ -92,9 +105,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // intt tc;
-    // cin >> tc;
-    // while (tc--)
-    solve();
+    intt tc;
+    cin >> tc;
+    while (tc--)
+        solve();
     return 0;
 }
