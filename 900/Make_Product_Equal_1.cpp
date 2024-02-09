@@ -66,6 +66,55 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 
 void solve()
 {
+    cin >> n;
+    v.rs(n);
+    intt zero = 0;
+    intt ans = 0;
+    f(i, n)
+    {
+        cin >> v[i];
+        if (v[i] < -1)
+        {
+            ans += abs(v[i]) - 1;
+            // cout << ans << " ";
+            v[i] = -1;
+        }
+        else if (v[i] > 1)
+        {
+            ans += (v[i] - 1);
+            // cout << ans << " ";
+            v[i] = 1;
+        }
+        else
+        {
+            if (v[i] == 0)
+                zero++;
+        }
+    }
+    intt pos = 0;
+    intt neg = 0;
+
+    f(i, n)
+    {
+        if (v[i] == 1)
+            pos++;
+        else if (v[i] == -1)
+            neg++;
+    }
+    if (pos + neg == n)
+    {
+        if (neg % 2 == 0)
+        {
+            cout << ans;
+            rt;
+        }
+        else
+        {
+            cout << ans + 2;
+            rt;
+        }
+    }
+    cout << ans + zero;
 }
 
 int32_t main()
@@ -73,9 +122,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    intt tc;
-    cin >> tc;
-    while (tc--)
-        solve();
+    // intt tc;
+    // cin >> tc;
+    // while (tc--)
+    solve();
     return 0;
 }
