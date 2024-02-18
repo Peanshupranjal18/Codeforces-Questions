@@ -36,7 +36,7 @@ using namespace __gnu_pbds;
 // Right Left Up Down
 intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m, c, d;
+intt a, b, n, m, d;
 
 bool possible(int x, int y)
 {
@@ -66,25 +66,14 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 
 void solve()
 {
-    // misha p=a t=c
-    // vasya p=b t=d
-    cin >> a >> b >> c >> d;
-    float op1 = (3 * a) / 10;
-    float op2 = a - (float(a / 250) * c);
-
-    float x1 = max(op1, op2);
-
-    float op3 = (3 * b) / 10;
-    float op4 = b - (float(b / 250) * d);
-
-    float x2 = max(op3, op4);
-
-    if (x1 > x2)
-        cout << "Misha";
-    if (x2 > x1)
-        cout << "Vasya";
-    if (x1 == x2)
-        cout << "Tie";
+    cin >> n >> d;
+    v.rs(n);
+    f(i, n) cin >> v[i];
+    intt sum = acc(all(v), 0);
+    if (sum + 10 * (n - 1) > d)
+        cout << -1 << "\n";
+    else
+        cout << (d - sum) / 5 << "\n";
 }
 
 int32_t main()
@@ -92,9 +81,7 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // intt tc;
-    // cin >> tc;
-    // while (tc--)
+    // intt tc;cin>>tc;while(tc--)
     solve();
     return 0;
 }
