@@ -36,7 +36,7 @@ using namespace __gnu_pbds;
 // Right Left Up Down
 intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m;
+intt a, b, n, m, x;
 
 bool possible(int x, int y)
 {
@@ -66,39 +66,23 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 
 void solve()
 {
-    cin >> n;
-    v.rs(n);
-    f(i, n) cin >> v[i];
-    // dominant pirhana in the aquarium
-    intt max_ele = maxv(all(v));
-    f(i, n)
+    cin >> x >> n;
+    // left x-d and right x+d
+    // i starting with 1 exactly i minutes after start he makes a jump of
+    // distance i even -> left and odd-> right
+    if (n % 4 == 0)
     {
-        if (v[i] == max_ele)
-        {
-            if (i == 0 and v[i + 1] != v[i])
-            {
-                cout << i + 1 << "\n";
-                rt;
-            }
-
-            if (i > 0 and v[i - 1] != v[i])
-            {
-                cout << i + 1 << "\n";
-                rt;
-            }
-            else if (i < n - 1 and v[i + 1] != v[i])
-            {
-                cout << i + 1 << "\n";
-                rt;
-            }
-            else if (i == n - 1 and v[i - 1] != v[i])
-            {
-                cout << i + 1 << "\n";
-                rt;
-            }
-        }
+        cout << x << "\n";
+        rt;
     }
-    cout << -1 << "\n";
+    if (n % 4 == 2)
+    {
+        cout << x - 1 << "\n";
+    }
+    if (n % 4 == 1)
+    {
+        cout << x - 4 * ()
+    }
 }
 
 int32_t main()
