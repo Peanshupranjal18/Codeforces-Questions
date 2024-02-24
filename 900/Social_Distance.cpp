@@ -36,7 +36,7 @@ using namespace __gnu_pbds;
 // Right Left Up Down
 intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m, x0;
+intt a, b, n, m;
 
 bool possible(int x, int y)
 {
@@ -64,37 +64,13 @@ bool isPrime(intt n)
 template <class T>
 using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+// josephus problem
+
 void solve()
 {
-    cin >> x0 >> n;
-    // left x-d and right x+d
-    // i starting with 1 exactly i minutes after start he makes a jump of
-    // distance i even -> left and odd-> right
-    ll rem = n % 4, d = 0;
-
-    if (rem == 1)
-    {
-        d = n * (-1);
-    }
-    else if (rem == 2)
-    {
-        d = 1;
-    }
-    else if (rem == 3)
-    {
-        d = n + 1;
-    }
-
-    if (x0 % 2 == 0)
-    {
-        x0 += d;
-    }
-    else
-    {
-        x0 -= d;
-    }
-
-    cout << x0 << endl;
+    cin >> n >> m;
+    v.rs(n);
+    f(i, n) cin >> v[i];
 }
 
 int32_t main()
