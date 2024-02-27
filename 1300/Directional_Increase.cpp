@@ -67,6 +67,21 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 void solve()
 {
     cin >> n;
+    v.rs(n);
+    f(i, n) cin >> v[i];
+    if (n == 1)
+    {
+        cout << "Yes"
+             << "\n";
+        rt;
+    }
+    if (v[n - 1] > 0 or v[0] < 1)
+    {
+        cout << "No"
+             << "\n";
+        rt;
+    }
+    if (v[0] >)
 }
 
 int32_t main()
