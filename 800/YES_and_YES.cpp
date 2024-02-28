@@ -68,13 +68,14 @@ void solve()
 {
     string s;
     cin >> s;
-    reverse(all(s));
-    string a;
-    cin >> a;
-    if (s == a)
-        cout << "YES";
+    for (intt i = 0; i < sz(s); i++)
+        s[i] = tolower(s[i]);
+    if (s == "yes")
+        cout << "YES"
+             << "\n";
     else
-        cout << "NO";
+        cout << "NO"
+             << "\n";
 }
 
 int32_t main()
@@ -82,7 +83,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // intt tc;cin>>tc;while(tc--)
-    solve();
+    intt tc;
+    cin >> tc;
+    while (tc--)
+        solve();
     return 0;
 }
