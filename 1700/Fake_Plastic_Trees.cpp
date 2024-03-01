@@ -68,17 +68,12 @@ void solve()
 {
     cin >> n;
     v.rs(n);
-    f(i, n) cin >> v[i];
-    intt cnt = 0;
-    f(i, n - 1)
+    f(i, n - 1) cin >> v[i];
+    vpi v1(n);
+    f(i, n)
     {
-        if (v[i] == v[i + 1])
-            cnt++;
-    }
-    if (cnt <= 1)
-    {
-        cout << 0 << "\n";
-        rt;
+        cin >> a >> b;
+        v1.pb(make_pair(a, b));
     }
 }
 
@@ -87,7 +82,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // intt tc;cin>>tc;while(tc--)
-    solve();
+    intt tc;
+    cin >> tc;
+    while (tc--)
+        solve();
     return 0;
 }

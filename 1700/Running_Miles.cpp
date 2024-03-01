@@ -64,22 +64,40 @@ bool isPrime(intt n)
 template <class T>
 using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+// street with n sights sight number i being i miles from beginning of
+// the street i beauty bi
+// start l end r
+// 3 most beautiful but more run more tired
+// choose l r -> at least 3 sights sum(beauty)-(r-l) is max
+// which implies we need to choose r-l such that 3 beauty ho and
+// (r-l) minimize ho jaye
+
 void solve()
 {
     cin >> n;
-    v.rs(n);
+    v.resize(n);
     f(i, n) cin >> v[i];
-    intt cnt = 0;
-    f(i, n - 1)
+    vector<intt> b = v;
+    vector<intt> pref_mx(n), suff_mx(n);
+    for (intt i = 0; i < n; ++i)
     {
-        if (v[i] == v[i + 1])
-            cnt++;
+        pref_mx[i] = b[i] + i;
+        suff_mx[i] = b[i] - i;
     }
-    if (cnt <= 1)
+    for (intt i = 1; i < n; ++i)
     {
-        cout << 0 << "\n";
-        rt;
+        pref_mx[i] = max(pref_mx[i], pref_mx[i - 1]);
     }
+    for (intt i = n - 2; i >= 0; --i)
+    {
+        suff_mx[i] = max(suff_mx[i], suff_mx[i + 1]);
+    }
+    intt ans = 0;
+    for (intt m = 1; m < n - 1; ++m)
+    {
+        ans = max(ans, (b[m] + pref_mx[m - 1] + suff_mx[m + 1]));
+    }
+    cout << ans << '\n';
 }
 
 int32_t main()
@@ -87,7 +105,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // intt tc;cin>>tc;while(tc--)
-    solve();
+    intt tc;
+    cin >> tc;
+    while (tc--)
+        solve();
     return 0;
 }
