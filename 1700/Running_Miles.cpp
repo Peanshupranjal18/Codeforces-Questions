@@ -71,6 +71,8 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // choose l r -> at least 3 sights sum(beauty)-(r-l) is max
 // which implies we need to choose r-l such that 3 beauty ho and
 // (r-l) minimize ho jaye
+// ye function bm + (bl+l) + (br-r) calculate kar rha h
+// suff_mx = (br-r) preff_mx = (bl+l)
 
 void solve()
 {
