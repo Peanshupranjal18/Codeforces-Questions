@@ -36,7 +36,7 @@ using namespace __gnu_pbds;
 // Right Left Up Down
 intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m, k;
+intt a, b, n, m;
 
 bool possible(int x, int y)
 {
@@ -66,57 +66,23 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 
 void solve()
 {
-    cin >> n >> k;
+    cin >> n;
     v.rs(n);
     f(i, n) cin >> v[i];
-    if (v[0] == v[n - 1])
+    sort(all(v));
+    intt cnt = 0;
+    for (intt i = 0; i < n; i += 2)
     {
-        intt cnt = 0;
-        f(i, n) if (v[i] == v[0]) cnt++;
-        if (cnt >= k)
-        {
-            cout << "YES"
-                 << "\n";
-            rt;
-        }
-        else
-        {
-            cout << "NO"
-                 << "\n";
-            rt;
+        if (i + 1 < n)
+        { // Added boundary check
+            swap(v[i], v[i + 1]);
+            cnt++;
         }
     }
-    else
-    {
-        intt i = 0, j = n - 1, l = 0, r = 0;
-        for (; i < n; i++)
-        {
-            if (v[i] == v[0])
-                l++;
-            if (l == k)
-                break;
-        }
-        for (; j >= 0; j--)
-        {
-            if (v[j] == v[n - 1])
-                r++;
-            if (r == k)
-                break;
-        }
-        // cout << i << " " << j << "\n";
-        if (i < j)
-        {
-            cout << "YES"
-                 << "\n";
-            rt;
-        }
-        else
-        {
-            cout << "NO"
-                 << "\n";
-            rt;
-        }
-    }
+    if (n % 2 == 0)
+        cnt--;
+    cout << cnt << "\n";
+    f(i, n) cout << v[i] << " ";
 }
 
 int32_t main()
@@ -124,9 +90,7 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    intt tc;
-    cin >> tc;
-    while (tc--)
-        solve();
+    // intt tc;cin>>tc;while(tc--)
+    solve();
     return 0;
 }

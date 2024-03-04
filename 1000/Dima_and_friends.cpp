@@ -36,7 +36,7 @@ using namespace __gnu_pbds;
 // Right Left Up Down
 intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m, k;
+intt a, b, n, m;
 
 bool possible(int x, int y)
 {
@@ -64,56 +64,19 @@ bool isPrime(intt n)
 template <class T>
 using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+// circle
+//
+
 void solve()
 {
-    cin >> n >> k;
-    v.rs(n);
+    cin >> n;
     f(i, n) cin >> v[i];
-    if (v[0] == v[n - 1])
+    intt x = acc(all(v), 0);
+    for (intt i = 1; i <= 5; i++)
     {
-        intt cnt = 0;
-        f(i, n) if (v[i] == v[0]) cnt++;
-        if (cnt >= k)
+        if ((x + i) % (n + 1) != 0)
         {
-            cout << "YES"
-                 << "\n";
-            rt;
-        }
-        else
-        {
-            cout << "NO"
-                 << "\n";
-            rt;
-        }
-    }
-    else
-    {
-        intt i = 0, j = n - 1, l = 0, r = 0;
-        for (; i < n; i++)
-        {
-            if (v[i] == v[0])
-                l++;
-            if (l == k)
-                break;
-        }
-        for (; j >= 0; j--)
-        {
-            if (v[j] == v[n - 1])
-                r++;
-            if (r == k)
-                break;
-        }
-        // cout << i << " " << j << "\n";
-        if (i < j)
-        {
-            cout << "YES"
-                 << "\n";
-            rt;
-        }
-        else
-        {
-            cout << "NO"
-                 << "\n";
+            cout << i;
             rt;
         }
     }
@@ -124,9 +87,7 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    intt tc;
-    cin >> tc;
-    while (tc--)
-        solve();
+    // intt tc;cin>>tc;while(tc--)
+    solve();
     return 0;
 }
