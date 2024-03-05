@@ -71,15 +71,6 @@ void solve()
 {
     cin >> n;
     f(i, n) cin >> v[i];
-    intt x = acc(all(v), 0);
-    for (intt i = 1; i <= 5; i++)
-    {
-        if ((x + i) % (n + 1) != 0)
-        {
-            cout << i;
-            rt;
-        }
-    }
 }
 
 int32_t main()

@@ -1,6 +1,39 @@
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+
+#pragma GCC optimize("Ofast,unroll-loops")
+#pragma GCC target("avx,avx2,avx512,fma")
+
+template <typename A, typename B>
+ostream &operator<<(ostream &os, const pair<A, B> &p)
+{
+    return os << '(' << p.first << ", " << p.second << ')';
+}
+template <typename T_container, typename T = typename enable_if<!is_same<T_container, string>::value, typename T_container::value_type>::type>
+ostream &operator<<(ostream &os, const T_container &v)
+{
+    os << '{';
+    string sep;
+    for (const T &x : v)
+        os << sep << x, sep = ", ";
+    return os << '}';
+}
+void dbg_out() { cerr << endl; }
+template <typename Head, typename... Tail>
+void dbg_out(Head H, Tail... T)
+{
+    cerr << ' ' << H;
+    dbg_out(T...);
+}
+#ifdef LOCAL
+#define dbg(...) cerr << "(" << #__VA_ARGS__ << "): ", dbg_out(__VA_ARGS__)
+#else
+#define dbg(...)
+#endif
+
 #define intt long long int
 #define ll long long
 #define ld long double
@@ -30,22 +63,164 @@
 #define mih priority_queue<intt, vector<intt>, greater<intt>>
 #define mahp priority_queue<pair<intt, intt>>
 #define mihp priority_queue<pair<intt, intt>, vector<pair<intt, intt>>, greater<pair<intt, intt>>>
-using namespace std;
-using namespace __gnu_pbds;
+#define PI 3.1415926535897932384626433832795l
 
-// Right Left Up Down
-intt dx[] = {0, 0, 1, -1};
-intt dy[] = {1, -1, 0, 0};
-intt a, b, n, m;
+// RANDOM NUMBER GENERATOR
+mt19937 RNG(chrono::steady_clock::now().time_since_epoch().count());
+#define SHUF(v) shuffle(all(v), RNG);
 
-bool possible(int x, int y)
+// Use mt19937_64 for 64 bit random numbers.
+
+// BITWISE OPERATIONS
+/* a=target variable, b=bit number to act upon 0-n */
+#define BIT_SET(a, b) ((a) |= (1ULL << (b)))
+#define BIT_CLEAR(a, b) ((a) &= ~(1ULL << (b)))
+#define BIT_FLIP(a, b) ((a) ^= (1ULL << (b)))
+
+// '!!' to make sure this returns 0 or 1
+#define BIT_CHECK(a, b) (!!((a) & (1ULL << (b))))
+
+// BITMASK OPERATIONS
+#define BITMASK_SET(x, mask) ((x) |= (mask))
+#define BITMASK_CLEAR(x, mask) ((x) &= (~(mask)))
+#define BITMASK_FLIP(x, mask) ((x) ^= (mask))
+#define BITMASK_CHECK_ALL(x, mask) (!(~(x) & (mask)))
+#define BITMASK_CHECK_ANY(x, mask) ((x) & (mask))
+
+// MATH FUNCTIONS
+template <typename T>
+T gcd(T a, T b) { return (b ? __gcd(a, b) : a); }
+template <typename T>
+T lcm(T a, T b) { return (a * (b / gcd(a, b))); }
+int add(int a, int b, int c = MOD)
 {
-    return (x < n && x >= 0 && y < m && y >= 0);
+    int res = a + b;
+    return (res >= c ? res - c : res);
+}
+int mod_neg(int a, int b, int c = MOD)
+{
+    int res;
+    if (abs(a - b) < c)
+        res = a - b;
+    else
+        res = (a - b) % c;
+    return (res < 0 ? res + c : res);
+}
+int mul(int a, int b, int c = MOD)
+{
+    ll res = (ll)a * b;
+    return (res >= c ? res % c : res);
+}
+int muln(int a, int b, int c = MOD)
+{
+    ll res = (ll)a * b;
+    return ((res % c) + c) % c;
+}
+ll mulmod(ll a, ll b, ll m = MOD)
+{
+    ll q = (ll)(((LD)a * (LD)b) / (LD)m);
+    ll r = a * b - q * m;
+    if (r > m)
+        r %= m;
+    if (r < 0)
+        r += m;
+    return r;
+}
+template <typename T>
+T expo(T e, T n)
+{
+    T x = 1, p = e;
+    while (n)
+    {
+        if (n & 1)
+            x = x * p;
+        p = p * p;
+        n >>= 1;
+    }
+    return x;
+}
+template <typename T>
+T power(T e, T n, T m = MOD)
+{
+    T x = 1, p = e;
+    while (n)
+    {
+        if (n & 1)
+            x = mul(x, p, m);
+        p = mul(p, p, m);
+        n >>= 1;
+    }
+    return x;
+}
+template <typename T>
+T extended_euclid(T a, T b, T &x, T &y)
+{
+    T xx = 0, yy = 1;
+    y = 0;
+    x = 1;
+    while (b)
+    {
+        T q = a / b, t = b;
+        b = a % b;
+        a = t;
+        t = xx;
+        xx = x - q * xx;
+        x = t;
+        t = yy;
+        yy = y - q * yy;
+        y = t;
+    }
+    return a;
+}
+template <typename T>
+T mod_inverse(T a, T n = MOD)
+{
+    T x, y, z = 0;
+    T d = extended_euclid(a, n, x, y);
+    return (d > 1 ? -1 : mod_neg(x, z, n));
 }
 
+// Permutation and Combination
+int ncr(int n, int r, int c = MOD) { return mul(mul(ifact[r], ifact[n - r], c), fact[n], c); }
+
+// Prime Generator
+const int N = 1e7 + 10;
+int prime[20000010];
+bool isprime[N];
+int nprime;
+template <typename T>
+void Sieve(T a)
+{
+    nprime = 0;
+    memset(isprime, true, sizeof(isprime));
+    isprime[1] = false;
+    for (int i = 2; i < N; i++)
+    {
+        if (isprime[i])
+        {
+            prime[nprime++] = i;
+            for (int j = 2; i * j < N; j++)
+                isprime[i * j] = false;
+        }
+    }
+}
+
+// Geometry Functions
+// Add your geometry functions here
+
+// Direction Arrays
+intt dx[] = {0, 0, 1, -1};
+intt dy[] = {1, -1, 0, 0};
+
+// Utility Functions
+bool possible(int x, int y) { return (x < n && x >= 0 && y < m && y >= 0); }
+
+// Global Variables
 vi v, v1, v2, v3, v4;
 vi dp(200001);
+intt a, b, n, m;
 
+// Primality Check
 bool isPrime(intt n)
 {
     if (n <= 1)
@@ -54,22 +229,24 @@ bool isPrime(intt n)
         return true;
     if (n % 2 == 0 || n % 3 == 0)
         return false;
-    for (intt i = 5; i <= sqrt(n); i = i + 6)
+    for (intt i = 5; i * i <= n; i = i + 6)
+    {
         if (n % i == 0 || n % (i + 2) == 0)
             return false;
+    }
     return true;
 }
 
-// oset<int>s:s.find_by_order(k):Kth element in s,s.order_of_key(k):Number of item strictly lessthan k
+// Ordered Set
 template <class T>
 using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+// Solve Function
 void solve()
 {
-    string s;
-    cin >> s;
 }
 
+// Main Function
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
@@ -78,6 +255,8 @@ int32_t main()
     intt tc;
     cin >> tc;
     while (tc--)
+    {
         solve();
+    }
     return 0;
 }
