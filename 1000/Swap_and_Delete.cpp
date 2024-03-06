@@ -271,6 +271,68 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
+    string s;
+    cin >> s;
+    intt n = sz(s);
+    // delete -> 1 coin swap -> 0
+    intt one = 0, zero = 0;
+    f(i, n)
+    {
+        if (s[i] == '0')
+            zero++;
+        else
+            one++;
+    }
+    if (zero == one)
+    {
+        cout << 0 << "\n";
+        rt;
+    }
+    string t = "";
+    intt i = 0;
+
+    while (zero > 0 and one > 0)
+    {
+        if (s[i] == '0')
+        {
+            t.pb('1');
+            one--;
+        }
+        else if (s[i] == '1')
+        {
+            t.pb('0');
+            zero--;
+        }
+        i++;
+    }
+    while (one > 0)
+    {
+        t.pb('1');
+        one--;
+    }
+
+    while (zero > 0)
+    {
+        t.pb('0');
+        zero--;
+    }
+
+    // cout << t << "\n";
+    intt x = 0, y = 0, ans = 0;
+    while (y < n)
+    {
+        if (s[x] != t[y])
+        {
+            x++;
+            y++;
+        }
+        else
+        {
+            ans++;
+            y++;
+        }
+    }
+    cout << ans << "\n";
 }
 
 // Main Function

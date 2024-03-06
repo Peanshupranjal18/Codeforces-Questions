@@ -271,6 +271,89 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
+    intt n, k;
+    cin >> n >> k;
+    // set ai = ai + 1;
+    // minimum operations for prod(v)%k==0
+    v.rs(n);
+
+    intt even = 0, odd = 0;
+
+    f(i, n)
+    {
+        cin >> v[i];
+        if (v[i] % 2)
+            odd++;
+        else
+            even++;
+    }
+
+    f(i, n) if (v[i] % k == 0)
+    {
+        cout << 0 << "\n";
+        rt;
+    }
+
+    if (k == 2)
+    {
+        cout << 1 << "\n";
+        rt;
+    }
+
+    // sahi
+
+    if (k == 4)
+    {
+        if (even >= 2)
+        {
+            cout << 0 << "\n";
+            rt;
+        }
+        else
+        {
+            f(i, n) if (v[i] % 4 == 3)
+            {
+                cout << 1 << "\n";
+                rt;
+            }
+            f(i, n) if (v[i] % 4 == 1 and even == 1)
+            {
+                cout << 1 << "\n";
+                rt;
+            }
+            cout << 2 << "\n";
+        }
+    }
+
+    if (k == 3)
+    {
+        f(i, n) if (v[i] % 3 == 2)
+        {
+            cout << 1 << "\n";
+            rt;
+        }
+        cout << 2 << "\n";
+    }
+
+    if (k == 5)
+    {
+        f(i, n) if (v[i] % k == 4)
+        {
+            cout << 1 << "\n";
+            rt;
+        }
+        f(i, n) if (v[i] % k == 3)
+        {
+            cout << 2 << "\n";
+            rt;
+        }
+        f(i, n) if (v[i] % k == 2)
+        {
+            cout << 3 << "\n";
+            rt;
+        }
+        cout << 4 << "\n";
+    }
 }
 
 // Main Function
