@@ -273,14 +273,24 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 void solve()
 {
     cin >> n;
-    intt ans = 0;
-    while (n)
+    um<string, int> dp;
+    f(i, n)
     {
-        if (n & 1)
-            ans++;
-        n >>= 1;
+        string s;
+        cin >> s;
+        dp[s]++;
     }
-    cout << ans;
+    intt ans = LLONG_MIN;
+    string res;
+    for (auto it = dp.begin(); it != dp.end(); it++)
+    {
+        if (it->sec > ans)
+        {
+            ans = it->sec;
+            res = it->fi;
+        }
+    }
+    cout << res;
 }
 
 // Main Function

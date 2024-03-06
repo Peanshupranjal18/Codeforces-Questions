@@ -1,2 +1,1 @@
-
-    
+bool possible(int x, int y) { return (x < n && x >= 0 && y < m && y >= 0); }

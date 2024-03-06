@@ -272,15 +272,20 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
-    cin >> n;
-    intt ans = 0;
-    while (n)
+    cin >> n >> m;
+    int arr[m];
+    int place = 1;
+    int ans = 0;
+    for (auto &i : arr)
     {
-        if (n & 1)
-            ans++;
-        n >>= 1;
+        cin >> i;
+        if (place <= i)
+            ans += i - place;
+        else
+            ans += (n - (place - i));
+        place = i;
     }
-    cout << ans;
+    cout << ans << endl;
 }
 
 // Main Function

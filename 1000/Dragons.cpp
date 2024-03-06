@@ -5,6 +5,7 @@ using namespace std;
 using namespace __gnu_pbds;
 
 #pragma GCC optimize("Ofast,unroll-loops")
+// #pragma GCC target("avx,avx2,avx512,fma")
 
 template <typename A, typename B>
 ostream &operator<<(ostream &os, const pair<A, B> &p)
@@ -243,7 +244,7 @@ intt dy[] = {1, -1, 0, 0};
 // Global Variables
 vi v, v1, v2, v3, v4;
 vi dp(200001);
-intt a, b, n, m;
+intt a, b, n, m, s;
 
 // Utility Functions
 bool possible(int x, int y) { return (x < n && x >= 0 && y < m && y >= 0); }
@@ -272,15 +273,26 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
-    cin >> n;
-    intt ans = 0;
-    while (n)
+    cin >> s >> n;
+    vpi v;
+    f(i, n)
     {
-        if (n & 1)
-            ans++;
-        n >>= 1;
+        cin >> a >> b;
+        v.pb({a, b});
     }
-    cout << ans;
+    sort(all(v));
+    f(i, n)
+    {
+        if (s <= v[i].fi)
+        {
+            cout << "NO"
+                 << "\n";
+            rt;
+        }
+        s += v[i].sec;
+    }
+    cout << "YES"
+         << "\n";
 }
 
 // Main Function
@@ -289,7 +301,6 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // intt tc; cin >> tc; while (tc--)
     solve();
     return 0;
 }

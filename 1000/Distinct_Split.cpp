@@ -241,12 +241,12 @@ intt dx[] = {0, 0, 1, -1};
 intt dy[] = {1, -1, 0, 0};
 
 // Global Variables
-vi v, v1, v2, v3, v4;
+// vi v, v1, v2, v3, v4;
 vi dp(200001);
-intt a, b, n, m;
+// intt a, b, n, m;
 
 // Utility Functions
-bool possible(int x, int y) { return (x < n && x >= 0 && y < m && y >= 0); }
+// bool possible(int x, int y) { return (x < n && x >= 0 && y < m && y >= 0); }
 
 // Primality Check
 bool isPrime(intt n)
@@ -272,15 +272,32 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
+    intt n;
     cin >> n;
-    intt ans = 0;
-    while (n)
+    string s;
+    cin >> s;
+    vi v(26, 0);
+
+    intt cnt = 0, i = 0;
+    for (; i < n; i++)
     {
-        if (n & 1)
-            ans++;
-        n >>= 1;
+        if (v[s[i] - 'a'] == 1)
+            break;
+        v[s[i] - 'a']++;
+        cnt++;
     }
-    cout << ans;
+
+    f(x, 26) v[x] = 0;
+
+    ff(j, i, n)
+    {
+        v[s[j] - 'a']++;
+    }
+
+    intt cnt1 = 0;
+    f(p, 26) if (v[p] > 0) cnt1++;
+
+    cout << cnt + cnt1 << "\n";
 }
 
 // Main Function
@@ -289,7 +306,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // intt tc; cin >> tc; while (tc--)
-    solve();
+    intt tc;
+    cin >> tc;
+    while (tc--)
+        solve();
     return 0;
 }
