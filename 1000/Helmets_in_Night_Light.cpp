@@ -277,6 +277,54 @@ void solve()
     f(i, n) cin >> v[i];
     v1.rs(n);
     f(i, n) cin >> v1[i];
+    // cost and aadmi ka pair
+    vpi v2;
+    f(i, n) v2.pb({v1[i], v[i]});
+    sort(all(v2));
+    intt size = n;
+    intt ans = 0;
+    intt flag = 0;
+    // sahi
+
+    f(i, n)
+    {
+        if (v2[i].fi <= p and flag == 0)
+        {
+            ans += p;
+            size--;
+            flag = 1;
+            intt x;
+            if (size <= v2[i].sec)
+                x = size;
+            else
+                x = v2[i].sec;
+            ans += v2[i].fi * x;
+            size -= x;
+            if (size == 0)
+                break;
+        }
+        else if (v2[i].fi <= p and flag == 1)
+        {
+            intt x;
+            if (size <= v2[i].sec)
+                x = size;
+            else
+                x = v2[i].sec;
+            ans += v2[i].fi * x;
+            size -= x;
+            if (size == 0)
+                break;
+        }
+    }
+    if (size > 0)
+    {
+        while (size > 0)
+        {
+            ans += p;
+            size--;
+        }
+    }
+    cout << ans << "\n";
 }
 
 // Main Function
