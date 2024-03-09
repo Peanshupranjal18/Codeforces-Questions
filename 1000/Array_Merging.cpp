@@ -268,37 +268,64 @@ bool isPrime(intt n)
 template <class T>
 using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+vector<intt> amax;
+vector<intt> bmax;
+
 // Solve Function
 void solve()
 {
-    intt n, k, q;
-    cin >> n >> k >> q;
-    v.rs(n);
-    f(i, n)
+    intt n;
+    cin >> n;
+    amax.assign(2 * n + 1, 0);
+    bmax.assign(2 * n + 1, 0);
+    vector<intt> v(n);
+    cin >> v[0];
+    amax[v[0]] = 1;
+    intt ans = 1;
+    for (intt i = 1; i < n; i++)
     {
-        intt a;
-        cin >> a;
-        if (a <= q)
-            v[i] = 1;
-        else
-            v[i] = 0;
-    }
-    intt size = 0;
-    intt ans = 0;
-    f(i, n)
-    {
-        if (v[i] == 1)
-            size++;
+        cin >> v[i];
+        if (v[i] == v[i - 1])
+            ans++;
         else
         {
-            if (size >= k)
-                ans += ((size - k + 1) * (size - k + 2)) / 2;
-            size = 0;
+            amax[v[i - 1]] = max(amax[v[i - 1]], ans);
+            ans = 1;
         }
     }
-    if (size >= k)
-        ans += ((size - k + 1) * (size - k + 2)) / 2;
-    cout << ans << "\n";
+    amax[v[n - 1]] = max(amax[v[n - 1]], ans);
+
+    ans = 1;
+
+    vector<intt> v1(n);
+    cin >> v1[0];
+
+    bmax[v1[0]] = 1;
+
+    for (intt i = 1; i < n; i++)
+    {
+        cin >> v1[i];
+        if (v1[i] == v1[i - 1])
+            ans++;
+        else
+        {
+            bmax[v1[i - 1]] = max(bmax[v1[i - 1]], ans);
+            ans = 1;
+        }
+    }
+
+    bmax[v1[n - 1]] = max(bmax[v1[n - 1]], ans);
+
+    intt res = 0;
+
+    // f(i, 2 * n + 1) cout << bmax[i] << " ";
+    // cout << "\n";
+
+    f(i, 2 * n + 1)
+    {
+        res = max(res, amax[i] + bmax[i]);
+    }
+    cout << res << "\n";
 }
 
 // Main Function

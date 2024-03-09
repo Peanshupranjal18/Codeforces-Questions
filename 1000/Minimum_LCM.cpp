@@ -271,34 +271,24 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
-    intt n, k, q;
-    cin >> n >> k >> q;
-    v.rs(n);
-    f(i, n)
+    intt n;
+    cin >> n;
+    intt i = 1;
+    intt j = n - 1;
+    intt ans = LLONG_MAX;
+    intt a, b;
+    while (i <= j)
     {
-        intt a;
-        cin >> a;
-        if (a <= q)
-            v[i] = 1;
-        else
-            v[i] = 0;
-    }
-    intt size = 0;
-    intt ans = 0;
-    f(i, n)
-    {
-        if (v[i] == 1)
-            size++;
-        else
+        if (lcm(i, j) < ans)
         {
-            if (size >= k)
-                ans += ((size - k + 1) * (size - k + 2)) / 2;
-            size = 0;
+            ans = lcm(i, j);
+            a = i;
+            b = j;
         }
+        i++;
+        j--;
     }
-    if (size >= k)
-        ans += ((size - k + 1) * (size - k + 2)) / 2;
-    cout << ans << "\n";
+    cout << a << " " << b << "\n";
 }
 
 // Main Function
