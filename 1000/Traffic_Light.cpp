@@ -277,6 +277,52 @@ void solve()
     cin >> c;
     string s;
     cin >> s;
+    v.rs(n, 0);
+    intt ind = 0;
+    for (intt i = n - 1; i >= 0; i--)
+    {
+        if (s[i] == 'g')
+        {
+            ind = i;
+            v[i] = ind;
+        }
+        else
+            v[i] = ind;
+    }
+
+    // f(i, n) cout << v[i] << " ";
+
+    intt first_g = -1;
+    f(i, n) if (s[i] == 'g')
+    {
+        first_g = i;
+        break;
+    }
+
+    // sahi
+
+    intt ans = LLONG_MIN;
+    f(i, n)
+    {
+        if (s[i] == c)
+        {
+            if (v[i] == 0)
+            {
+                if (c == 'g')
+                {
+                    ans = 0;
+                    break;
+                }
+                ans = max(ans, (n - i) + first_g);
+            }
+            else
+            {
+                ans = max(ans, v[i] - i);
+            }
+        }
+    }
+
+    cout << ans << "\n";
 }
 
 // Main Function

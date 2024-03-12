@@ -272,11 +272,7 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 void solve()
 {
     intt n;
-    f(i, n)
-    {
-        intt m;
-        cin >> m;
-    }
+    cin >> n;
 }
 
 // Main Function
