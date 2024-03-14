@@ -275,22 +275,13 @@ void solve()
     cin >> n;
     string s;
     cin >> s;
-    string a = s;
-    sort(all(a));
-    if (a == s)
+    ff(i, 1, n)
     {
-        cout << "NO"
-             << "\n";
-        rt;
-    }
-    for (intt i = n - 1; i >= 0; i--)
-    {
-        intt x = ub(s.begin(), s.begin() + (i - 1), s[i]) - s.begin();
-        if (x >= 0)
+        if (s[i] < s[i - 1])
         {
             cout << "YES"
                  << "\n";
-            cout << x + 1 << " " << i + 1 << "\n";
+            cout << i << " " << i + 1 << "\n";
             rt;
         }
     }
