@@ -105,9 +105,10 @@ int mod_neg(int a, int b, int c = MOD)
         res = (a - b) % c;
     return (res < 0 ? res + c : res);
 }
-int mul(int a, int b, int c)
+int mul(int a, int b, int c = MOD)
 {
-    return (1LL * a * b) % c;
+    ll res = (ll)a * b;
+    return (res >= c ? res % c : res);
 }
 int muln(int a, int b, int c = MOD)
 {
@@ -267,38 +268,27 @@ bool isPrime(intt n)
 template <class T>
 using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-// calculate product abs(ai-aj)
-// output modulo m
+// k such that 1<=k<=r k number of days in week
+//
 
 // Solve Function
-
-// iss question mein ye dhyaan dena h ki normal brute force solution
-// chal gaya jaise ki humlog n>m wala condition ke liye sidha return
-// kar jaa rhe h to uss case mein kaafi saara test case aise hi nikal
-// gaya
-
-// ye question ek important example h brute force solution bhi accept
-// hota h agar kaafi saara options eliminate kar de to
-
 void solve()
 {
-    intt n, m;
-    cin >> n >> m;
-    v.rs(n);
-    f(i, n) cin >> v[i];
-    if (n > m)
+    intt n, r;
+    intt l = 1;
+    cin >> n >> r;
+    intt ans = 0;
+    if (n <= 1)
     {
-        cout << 0;
+        cout << 1 << "\n";
         rt;
     }
-    intt res = 1;
-    // product mikalna
-    f(i, n)
+    if (n <= r)
     {
-        for (intt j = i + 1; j < n; j++)
-            res = mul(res, abs(v[i] - v[j]) % m, m);
+        r = n - 1;
+        ans = 1;
     }
-    cout << res;
+    cout << ans + ((l + r) * (r - l + 1)) / 2 << "\n";
 }
 
 // Main Function
@@ -307,9 +297,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // intt tc;
-    // cin >> tc;
-    // while (tc--)
-    solve();
+    intt tc;
+    cin >> tc;
+    while (tc--)
+        solve();
     return 0;
 }
