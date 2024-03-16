@@ -271,6 +271,30 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
+    intt n;
+    cin >> n;
+    if (n >= 1900)
+    {
+        cout << "Division 1"
+             << "\n";
+        rt;
+    }
+    if (n <= 1899 and n >= 1600)
+    {
+        cout << "Division 2"
+             << "\n";
+        rt;
+    }
+    if (n >= 1400 and n <= 1599)
+    {
+        cout << "Division 3"
+             << "\n";
+        rt;
+    }
+    else
+        cout << "Division 4"
+             << "\n";
+    rt;
 }
 
 // Main Function
