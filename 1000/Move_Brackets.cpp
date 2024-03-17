@@ -271,13 +271,6 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
-    intt n;
-    cin >> n;
-    v.rs(n);
-    f(i, n) cin >> v[i];
-    sort(all(v), greater<intt>());
-    f(i, n) cout << v[i] << " ";
-    cout << "\n";
 }
 
 // Main Function

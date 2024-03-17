@@ -271,13 +271,77 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
-    intt n;
-    cin >> n;
-    v.rs(n);
-    f(i, n) cin >> v[i];
-    sort(all(v), greater<intt>());
-    f(i, n) cout << v[i] << " ";
-    cout << "\n";
+    intt a, b;
+    cin >> a >> b;
+    intt cnt = 0;
+    if (a == b)
+    {
+        cout << 0 << "\n";
+        rt;
+    }
+
+    if (a < b)
+    {
+        if (b % a != 0)
+        {
+            cout << -1 << "\n";
+            rt;
+        }
+        intt x = b / a;
+        while (x % 8 == 0 and x > 1)
+        {
+            x /= 8;
+            cnt++;
+        }
+        while (x % 4 == 0 and x > 1)
+        {
+            x /= 4;
+            cnt++;
+        }
+        while (x % 2 == 0 and x > 1)
+        {
+            x /= 2;
+            cnt++;
+        }
+        if (x > 1)
+        {
+            cout << -1 << "\n";
+            rt;
+        }
+        cout << cnt << "\n";
+        rt;
+    }
+    else
+    {
+        if (a % b != 0)
+        {
+            cout << -1 << "\n";
+            rt;
+        }
+        intt x = a / b;
+        while (x % 8 == 0 and x > 1)
+        {
+            x /= 8;
+            cnt++;
+        }
+        while (x % 4 == 0 and x > 1)
+        {
+            x /= 4;
+            cnt++;
+        }
+        while (x % 2 == 0 and x > 1)
+        {
+            x /= 2;
+            cnt++;
+        }
+        if (x > 1)
+        {
+            cout << -1 << "\n";
+            rt;
+        }
+        cout << cnt << "\n";
+        rt;
+    }
 }
 
 // Main Function
