@@ -271,6 +271,40 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
+    int n;
+    cin >> n;
+    string a;
+    cin >> a;
+    stack<char> s;
+    s.push('#');
+    int i = 0;
+    int cnt = 0;
+    while (!s.empty() && i < n)
+    {
+        if (a[i] == '(')
+        {
+            s.push(a[i]);
+            i++;
+        }
+        else if (a[i] == ')' && (s.top() == '#' || s.top() == ')'))
+        {
+            s.push(a[i]);
+            i++;
+        }
+        else
+        {
+            s.pop();
+            i++;
+        }
+    }
+
+    while (s.top() != '#')
+    {
+        s.pop();
+        cnt++;
+    }
+    cout << cnt / 2 << "\n";
+    return;
 }
 
 // Main Function
