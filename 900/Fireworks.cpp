@@ -274,33 +274,7 @@ void solve()
 {
     intt a, b, m;
     cin >> a >> b >> m;
-
-    // two installation
-    // a minutes b minutes
-    // visible for m+1 seconds after launch
-
-    intt x = m / a;
-    intt y = m / b;
-    if (x == 0 and y != 0)
-    {
-        cout << y + 1 << "\n";
-    }
-    if (x == 0 and y == 0)
-    {
-        if (abs(a - b) <= m)
-            cout << 2 << "\n";
-        else
-            cout << 1 << "\n";
-        rt;
-    }
-
-    else if (y == 0 and x != 0)
-    {
-        cout << x + 1 << "\n";
-        rt;
-    }
-
-    cout << x + y + 2 << "\n";
+    cout << (m / a) + (m / b) + 2 << "\n";
 }
 
 // Main Function

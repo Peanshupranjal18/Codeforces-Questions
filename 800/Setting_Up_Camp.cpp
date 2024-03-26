@@ -272,35 +272,24 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
-    intt a, b, m;
-    cin >> a >> b >> m;
+    intt a, b, c;
+    cin >> a >> b >> c;
+    // each tent upto 3 people
 
-    // two installation
-    // a minutes b minutes
-    // visible for m+1 seconds after launch
+    intt d = b / 3;
+    intt e = b % 3;
 
-    intt x = m / a;
-    intt y = m / b;
-    if (x == 0 and y != 0)
+    intt f = c + e;
+
+    if (f < 3 and e != 0)
     {
-        cout << y + 1 << "\n";
-    }
-    if (x == 0 and y == 0)
-    {
-        if (abs(a - b) <= m)
-            cout << 2 << "\n";
-        else
-            cout << 1 << "\n";
+        cout << -1 << "\n";
         rt;
     }
 
-    else if (y == 0 and x != 0)
-    {
-        cout << x + 1 << "\n";
-        rt;
-    }
+    intt ans = (f % 3 == 0) ? a + d + (f / 3) : a + d + (f / 3) + 1;
 
-    cout << x + y + 2 << "\n";
+    cout << ans << "\n";
 }
 
 // Main Function
