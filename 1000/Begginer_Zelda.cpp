@@ -243,7 +243,7 @@ intt dy[] = {1, -1, 0, 0};
 
 // Global Variables
 vi v, v1, v2, v3, v4;
-vi dp(200001);
+// vi dp(200001, 0);
 
 // Utility Functions
 bool possible(int x, int y, int n, int m) { return (x < n && x >= 0 && y < m && y >= 0); }
@@ -272,7 +272,27 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
-    //
+    intt n;
+    cin >> n;
+
+    vi dp(n + 1, 0);
+
+    f(i, n - 1)
+    {
+        intt a, b;
+        cin >> a >> b;
+        dp[a]++;
+        dp[b]++;
+    }
+
+    intt cnt = 0;
+
+    ff(i, 1, n + 1)
+    {
+        cnt += (dp[i] == 1);
+    }
+
+    cout << (cnt + 1) / 2 << "\n";
 }
 
 // Main Function

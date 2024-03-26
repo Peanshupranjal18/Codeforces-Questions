@@ -272,7 +272,6 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
-    //
 }
 
 // Main Function
