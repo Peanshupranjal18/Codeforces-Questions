@@ -272,32 +272,8 @@ using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node
 // Solve Function
 void solve()
 {
-    intt n, p, l, t;
-    cin >> n >> p >> l >> t;
-    intt c = (n + 6) / 7;
-    // at least p points during those N days
-    // practical -> t lesson-> l
-    // k days he gets k.l points
-    // k*l+min(c,2*k)>=p
-
-    intt le = 0;
-    intt r = n;
-    intt ans = 0;
-    while (le <= r)
-    {
-        intt mid = le + (r - le) / 2;
-        if (((mid * l) + min(c, 2 * mid) * t) >= p)
-        {
-            ans = mid;
-            r = mid - 1;
-        }
-        else
-        {
-            le = mid + 1;
-        }
-    }
-    // ans would be work day
-    cout << n - ans << "\n";
+    intt n, q;
+    cin >> n >> q;
 }
 
 // Main Function
@@ -306,9 +282,7 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    intt tc;
-    cin >> tc;
-    while (tc--)
-        solve();
+    // intt tc; cin >> tc; while (tc--)
+    solve();
     return 0;
 }
